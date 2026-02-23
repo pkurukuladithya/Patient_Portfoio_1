@@ -1,0 +1,3 @@
+# Project exclude paths
+/frontend/src/App.jsx
+/frontend/src/main.jsx
