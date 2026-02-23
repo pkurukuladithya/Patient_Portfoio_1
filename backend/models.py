@@ -1,9 +1,10 @@
-from sqlalchemy import Column, Integer, String
-from database import Base
+"""
+Models - Backward compatibility module
+The actual models are in app/models/
+This file is kept for reference and backward compatibility.
+"""
 
-class User(Base):
-    __tablename__ = "users"
+from app.models.patient import Patient
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    email = Column(String)
+__all__ = ["Patient"]
+

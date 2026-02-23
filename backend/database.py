@@ -1,16 +1,11 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-from pathlib import Path
-import os
-from dotenv import load_dotenv
+"""
+Database configuration - Backward compatibility module
+The main database setup is in app/db/session.py
+This file is kept for reference and backward compatibility.
+"""
 
-BASE_DIR = Path(__file__).resolve().parent
-load_dotenv(BASE_DIR / ".env")
+from app.db.session import engine, SessionLocal
+from app.db.base import Base
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL is missing. Check backend/.env or your environment.")
+__all__ = ["engine", "SessionLocal", "Base"]
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(bind=engine)
-Base = declarative_base()

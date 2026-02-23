@@ -1,5 +1,10 @@
-from pydantic import BaseModel
+"""
+Schemas - Backward compatibility module
+The actual schemas are in app/schemas/
+This file is kept for reference and backward compatibility.
+"""
 
-class UserCreate(BaseModel):
-    name: str
-    email: str
+from app.schemas.patient import PatientCreate, PatientUpdate, PatientOut, PatientBase
+
+__all__ = ["PatientCreate", "PatientUpdate", "PatientOut", "PatientBase"]
+

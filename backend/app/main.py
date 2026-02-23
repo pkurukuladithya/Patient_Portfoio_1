@@ -1,10 +1,25 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import api_router
 from app.core.config import settings
+from app.db.base import Base
+from app.db.session import engine
 
-app = FastAPI(title="Patient Portfolio Management")
+# Import all models so Base.metadata knows about them
+import app.models  # noqa: F401
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Create database tables on startup (if they don't already exist)."""
+    Base.metadata.create_all(bind=engine)
+    yield
+
+
+app = FastAPI(title="Patient Portfolio Management", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
